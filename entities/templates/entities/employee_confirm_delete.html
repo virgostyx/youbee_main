@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/employee_confirm_delete.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">DELETE EMPLOYEE</div>
+        <div class="lcars-u-8-3" style="margin-left: 40px;">
+            <form id="delete_employee_form"
+                  action="{% url 'entities:delete_employee' employee.pk %}"
+                  method="POST">
+                {% csrf_token %}
+                <p>
+                    Are you sure you want to delete the employee: <b>{{ employee.full_name }}</b>
+                </p>
+                {% include './includes/_form_buttons_employee.html' %}
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+
+{% endblock content %}

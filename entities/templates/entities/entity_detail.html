@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'entities/css/entity_detail.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">ENTITY DETAIL</div>
+        <div class="lcars-u-8-8" style="margin-left: 40px;">
+                <form id="entity_detail_form"
+                  action="{% url 'entities:entity_detail' %}"
+                  method="POST">
+                {% csrf_token %}
+                <br>
+                <p>
+                <div class="lcars-row"> <!-- ENTITY NAME -->
+                    <div class="lcars-u-8">
+                        <label for="name"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter the entity name. Must be unique"
+                               style="margin-right: 51px;">
+                            <b>{{ form.name.label }}</b>
+                        </label>
+                        <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                               id="name"
+                               name="name"
+                               value="{% if form.name.initial %}{{ form.name.initial }}{% endif %}"
+                               type="text"
+                               title="Required. Enter the entity name.Must be unique."
+                               placeholder="Enter your entity name"
+                               maxlength="48"
+                               required
+                               autofocus/>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row"> <!-- ADDRESS1 -->
+                    <div class="lcars-u-8">
+                        <label for="address1"
+                               class="lcars-u-1 uppercase"
+                               title="Enter the entity address"
+                               style="display: inline-block;">
+                            <b>{{ form.address1.label }}:</b>
+                        </label>
+                        <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                               id="address1"
+                               name="address1"
+                               title="Enter the entity address"
+                               value="{% if form.address1.initial %}{{ form.address1.initial }}{% endif %}"
+                               type="text"
+                               placeholder="Enter the address"
+                               maxlength="128"/>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row"> <!-- ADDRESS2 -->
+                    <div class="lcars-u-8">
+                        <label for="address2"
+                               class="lcars-u-1 uppercase"
+                               title="Enter the entity address"
+                               style="display: inline-block;">
+                            <b>{{ form.address2.label }}:</b>
+                        </label>
+                        <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                               id="address2"
+                               name="address2"
+                               title="Enter the entity address"
+                               value="{% if form.address2.initial %}{{ form.address2.initial }}{% endif %}"
+                               type="text"
+                               placeholder="Enter the address"
+                               maxlength="128"/>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row"> <!-- CITY, ZIP -->
+                    <div class="lcars-u-4">
+                        <label for="city"
+                               class="lcars-u-1 uppercase"
+                               title="Enter the entity location"
+                               style="display: inline-block;">
+                            <b>{{ form.city.label }}:</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="city"
+                               name="city"
+                               title="Enter the entity location"
+                               value="{% if form.city.initial %}{{ form.city.initial }}{% endif %}"
+                               type="text"
+                               placeholder="Enter the city"
+                               maxlength="32"/>
+                    </div>
+                    <div class="lcars-u-4">
+                        <label for="zip_code"
+                               class="lcars-u-1 uppercase"
+                               title="Enter the entity location zip code"
+                               style="display: inline-block;">
+                            <b>{{ form.zip_code.label }}:</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="zip_code"
+                               name="zip_code"
+                               title="Enter the entity location zip code"
+                               value="{% if form.zip_code.initial %}{{ form.zip_code.initial }}{% endif %}"
+                               type="text"
+                               placeholder="Enter the zip_code"
+                               maxlength="16"/>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row"> <!-- COUNTRY -->
+                    <div class="lcars-u-4">
+                        <label for="country"
+                               class="lcars-u-1 uppercase"
+                               title="Choose the entity country from the list"
+                               style="display: inline-block;">
+                            <b>{{ form.country.label }}:</b>
+                        </label>
+                        {% load countries %}
+                        {% get_countries as countries %}
+                        <select id="country"
+                                name="country"
+                                class="lcars-u-2 lcars-golden-tanoi-color lcars-black-bg lcars-select-country"
+                                title="Choose the entity country from the list"
+                            {% for country in countries %}
+                            <option value="{{ country.code }}" {% if country.code == form.country.value %}selected{% endif %}>
+                                {{ country.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row"> <!-- PHONE NOS (2) -->
+                    <div class="lcars-u-4">
+                        <label for="phone1"
+                               class="lcars-u-1 uppercase"
+                               title="Enter a phone number"
+                               style="display: inline-block;">
+                            <b>{{ form.phone1.label }}:</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="phone1"
+                               name="phone1"
+                               title="Enter a phone number"
+                               value="{% if form.phone1.initial %}{{ form.phone1.initial }}{% endif %}"
+                               type="tel"
+                               placeholder="Enter the phone number"
+                               maxlength="16"/>
+                    </div>
+                    <div class="lcars-u-4">
+                        <label for="phone2" class="lcars-u-1 uppercase"
+                               title="Enter a phone number"
+                               style="display: inline-block;">
+                            <b>{{ form.phone2.label }}:</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="phone2"
+                               name="phone2"
+                               title="Enter a phone number"
+                               value="{% if form.phone2.initial %}{{ form.phone2.initial }}{% endif %}"
+                               type="tel"
+                               placeholder="Enter the phone number"
+                               maxlength="16"/>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row"> <!-- EMAILS (2) -->
+                    <div class="lcars-u-4">
+                        <label for="email1"
+                               class="lcars-u-1 uppercase"
+                               title="Enter an email address"
+                               style="display: inline-block;">
+                            <b>{{ form.email1.label }}:</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="email1"
+                               name="email1"
+                               title="Enter an email address"
+                               value="{% if form.email1.initial %}{{ form.email1.initial }}{% endif %}"
+                               type="email"
+                               placeholder="Enter the email address"
+                               maxlength="48"/>
+                    </div>
+                    <div class="lcars-u-4">
+                        <label for="email2"
+                               class="lcars-u-1 uppercase"
+                               title="Enter an email address"
+                               style="display: inline-block;">
+                            <b>{{ form.email2.label }}:</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="email2"
+                               name="email2"
+                               title="Enter an email address"
+                               value="{% if form.email2.initial %}{{ form.email2.initial }}{% endif %}"
+                               type="email"
+                               placeholder="Enter the email address"
+                               maxlength="48"/>
+                    </div>
+                </div>
+                </p>
+                {% include "./includes/_form_buttons.html" %}
+            </form>
+
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- COLUMN LAYOUT -->
+        <div class="lcars-column lcars-u-5">
+
+            <h1>ABOUT</h1>
+
+            <p>
+                YOUBEE is a web application designed for the management of contacts and entertaining events.
+                You define the list of contacts, an event and its guests list and a template invitation card.
+                Based on that, the application will boldly send by email the invitations to your guests automatically.
+                Enjoy!
+            </p>
+
+            <!-- LAYOUT -->
+            <h4>Credits</h4>
+            <br>
+            <span>Creator: <pre class="lcars-dodger-blue-color">Bruno FIEVET</pre></span>
+            <p>
+                <a>With the help of:</a>
+
+            <ul>
+                <li><span><pre
+                        class="lcars-rust-color">Julien DUVAL</pre> - Design and User Experience Advisor</span></li>
+                <li><span><pre class="lcars-rust-color">Huguette NTONI</pre> - User Experience Advisor</span></li>
+                <li><span><pre class="lcars-rust-color">Beata PALMAI</pre> - User Experience Advisor</span></li>
+            </ul>
+
+            </p>
+
+            <p>Live long and Prosper</p>
+            <br>
+            <a href="{% url 'home' %}">
+                <div class="lcars-element button lcars-neon-carrot-bg">Home</div>
+            </a>
+        </div>
+ {% endblock content %}

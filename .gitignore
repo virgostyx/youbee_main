@@ -1,0 +1,11 @@
+/.pytest_cache/
+/main_env/
+/tests/
+/entities/tests/
+/fixtures/
+/home/tests/
+/users/tests/
+/pytest.ini
+/conftest.py
+/diagram.py
+/db.sqlite3

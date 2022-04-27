@@ -1,0 +1,7 @@
+<select class="lcars-select {% cycle 'lcars-black-bg' 'lcars-mariner-bg' %} lcars-golden-tanoi-color">
+    {% for role in record.user.get_roles_names %}
+    <option>{{ role }}</option>
+    {% empty %}
+    <option>No Role</option>
+    {% endfor %}
+</select>

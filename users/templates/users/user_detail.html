@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'users/css/user_detail.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">USER DETAIL</div>
+        <div class="lcars-u-8-3" style="margin-left: 40px;">
+            <form id="user_detail_form"
+                  action="{% url 'users:user_detail' %}"
+                  method="POST">
+                {% csrf_token %}
+                <br>
+                <div class="lcars-row">
+                    <div class="lcars-u-4">
+                        <label for="first_name"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter your title from the list and first name"
+                               style="margin-right: 15px;">
+                            <b>{{ form.first_name.label }}</b>
+                        </label>
+                        <select class="lcars-black-bg lcars-white-color"
+                                id="title"
+                                name="title"
+                                title="Required. Choose a title from the list"
+                                required>
+                            <option value="1" {% if form.title.value == '1' %}selected{% endif %}>Mr.</option>
+                            <option value="2" {% if form.title.value == '2' %}selected{% endif %}>Mrs.</option>
+                            <option value="3" {% if form.title.value == '3' %}selected{% endif %}>Ms.</option>
+                        </select>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="first_name"
+                               name="first_name"
+                               value="{% if form.first_name.initial %}{{ form.first_name.initial }}{% endif %}"
+                               type="text"
+                               title="Required. Enter your first name"
+                               placeholder="Enter your first name"
+                               maxlength="150"
+                               required
+                               autofocus/>
+                    </div>
+                    <div class="lcars-u-4">
+                        <label for="last_name"
+                               class="lcars-u-1 uppercase"
+                               style="display: inline-block;">
+                            <b>{{ form.last_name.label }}</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="last_name"
+                               name="last_name"
+                               value="{% if form.last_name.initial %}{{ form.last_name.initial }}{% endif %}"
+                               type="text"
+                               placeholder="Enter the entity name"
+                               maxlength="150"
+                               required/>
+                    </div>
+                </div>
+                {% include './includes/_form_buttons.html' %}
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+{% endblock content %}

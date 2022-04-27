@@ -1,0 +1,19 @@
+{% if user.employee.is_manager %}
+<a href="{% url 'dashboard' %}">
+    <div class="lcars-element button lcars-sandy-brown-bg">Dashboard</div>
+</a>
+<a href="{% url 'entities:entity_detail' %}">
+    <div class="lcars-element button lcars-sandy-brown-bg">Entity Details</div>
+</a>
+<a href="{% url 'entities:entity_departments' %}">
+    <div class="lcars-element button lcars-sandy-brown-bg">Departments</div>
+</a>
+<a href="{% url 'entities:entity_employees' %}">
+    <div class="lcars-element button lcars-sandy-brown-bg">Employees</div>
+</a>
+{% endif %}
+{% if user.is_entity_supervisor %}
+<a href="#">
+    <div class="lcars-element button lcars-sandy-brown-bg">Partners</div>
+</a>
+{% endif %}

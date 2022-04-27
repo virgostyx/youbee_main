@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/checkboxes.min.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/contact.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8 lcars-black-bg">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">CONTACT</div>
+        <div class="lcars-u-8-10" style="margin-left: 40px;">
+            <form id="contact_form" action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                <p> <!-- Email input -->
+                    <label for="email"
+                           class="lcars-u-1 uppercase"
+                           style="display: inline-block;">
+                        <b>Email*: </b>
+                    </label>
+                    <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                           id="email"
+                           name="email"
+                           type="email"
+                           value="{% if form.email.initial %}{{ form.email.initial }}{% endif %}"
+                           placeholder="Enter your email address"
+                           title="Required. Enter your email address"
+                           maxlength="254"
+                           required
+                           autofocus>
+                </p>
+                <p> <!-- First name input -->
+                <div class="lcars-row">
+                    <div class="lcars-u-4">
+                        <label for="firstname"
+                               class="lcars-u-1 uppercase"
+                               style="display: inline-block;">
+                            <b>Firstname*: </b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="firstname"
+                               name="firstname"
+                               value="{% if form.firstname.initial %}{{ form.firstname.initial }}{% endif %}"
+                               title="Required. Enter your first name"
+                               type="text"
+                               placeholder="Enter your first name"
+                               maxlength="150"
+                               required/>
+                    </div>
+                    <div class="lcars-u-4" style="margin-left: 2.5rem;"> <!-- Last name input -->
+                        <label for="lastname"
+                               class="lcars-u-1 uppercase"
+                               style="display: inline-block;">
+                            <b>Lastname*: </b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="lastname"
+                               name="lastname"
+                               value="{% if form.lastname.initial %}{{ form.lastname.initial }}{% endif %}"
+                               type="text"
+                               placeholder="Enter your lastname"
+                               title="Required. Enter your last name"
+                               maxlength="150"
+                               required/>
+                    </div>
+                </div>
+                </p>
+                <p> <!-- Subject input -->
+                    <label class="lcars-u-1 uppercase">
+                        <b>Subject*: </b>
+                    </label>
+                    <br>
+                    <input class="lcars-u-7 decorated rounded lcars-golden-tanoi-color"
+                           style="margin-top: 1rem; margin-bottom: 1rem;"
+                           id="subject"
+                           name="subject"
+                           type="text"
+                           placeholder="Enter the subject"
+                           title="Required. Enter the subject of your message"
+                           maxlength="150"
+                           required/>
+                </p>
+                <p>
+                    <textarea id="message"
+                              name="message"
+                              class="lcars-u-7 lcars-text-input decorated rounded lcars-golden-tanoi-color"
+                              rows="10"
+                              placeholder="Type your message"
+                              required>Type your message
+					</textarea>
+                </p>
+                <p>
+                <div class="ckbx-circle-1">
+                    <input type="checkbox"
+                           id="copy_to"
+                           name="copy_to"
+                           title="Check this box if you want to receive a copy of your message"
+                           value="0">
+                    <label for="copy_to"
+                           title="Check this box if you want to receive a copy of your message"
+                           class="">
+                        Copy to self
+                    </label>
+                </div>
+                </p>
+                <div class="lcars-row centered button-row">
+                    <div class="lcars-column lcars-u-2">
+                        <div class="button-grid">
+                            <button class="lcars-element button uppercase lcars-husk-bg"
+                                    type="submit">Transmit
+                            </button>
+                            <a href="{% url 'home' %}">
+                                <button class="lcars-element button uppercase lcars-red-damask-bg"
+                                        type="button">Cancel
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+{% endblock content %}

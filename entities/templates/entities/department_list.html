@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/department_list.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-column lcars-u-4">
+        <div style="display: block;">
+            <div style="margin-bottom: 1rem;">
+                <a class="" style="" href="{% url 'entities:create_department' %}" title="Click to add a department">
+                    <i class="fas fa-plus-square"></i> Add Department</a>
+            </div>
+            <table class="lcars-table lcars-golden-tanoi-color special-caption">
+                <caption>DEPARTMENTS</caption>
+                <th>Name</th>
+                <th>Employees</th>
+                <th>Actions</th>
+                {% for d in department_list %}
+                <tr class="{% cycle 'lcars-black-bg' 'lcars-mariner-bg' %} lcars-golden-tanoi-color">
+                    <td>{{ d.name }}</td>
+                    <td>{{ d.employee_set.all.count }}</td>
+                    <td>
+                        <a class="icon" href="{% url 'entities:update_department' d.pk %}" title="Click to update the department name"><i class="fas fa-pen"></i></a>
+                        <span class="">
+                        <a class="icon" href="{% url 'entities:delete_department' d.pk %}" title="Click to delete a department"><i class="fas fa-eraser"></i></a>
+                        </span>
+                        <span class="">
+                        <a class="icon" href="" title="Click to link/unlink a department"><i class="fas fa-link"></i></a>
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

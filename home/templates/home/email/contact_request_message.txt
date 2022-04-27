@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% block content %}
+{% autoescape off %}
+{% blocktrans %}
+Message from {{ first_name }}, {{ last_name }}. Email: {{ email }}
+
+{{ message }}
+
+{% endblocktrans %}
+{% endautoescape %}
+{% endblock %}

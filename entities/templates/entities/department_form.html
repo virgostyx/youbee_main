@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/department_form.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8 lcars-black-bg">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">NEW DEPARTMENT</div>
+        <div class="lcars-u-8-4" style="margin-left: 40px;">
+            <form id="department_form"
+                  action="{% url 'entities:create_department' %}"
+                  method="POST">
+                {% csrf_token %}
+                <br>
+                <p> <!-- Department name input -->
+                    <label for="name"
+                           class="lcars-u-1 uppercase"
+                           title="Required. Enter the department name"
+                           style="display: inline-block;">
+                        <b>{{ form.name.label}} </b>
+                    </label>
+                    <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                           id="name"
+                           name="name"
+                           type="text"
+                           title="Required. Enter the department name"
+                           placeholder="Enter the department name"
+                           maxlength="24"
+                           required
+                           autofocus>
+                </p>
+                </p>
+                {% include './includes/_form_buttons_department.html' %}
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+
+{% endblock content %}

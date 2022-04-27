@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/employee_list.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-u-8">
+        <div class="table-container">
+            <div class="first-row-container">
+                <a class=""
+                   href="{% url 'entities:create_employee' %}"
+                   title="Click to add an employee">
+                    <i class="fas fa-plus-square"></i> Add Employee
+                </a>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                    </span>
+                </div>
+            </div>
+            <table class="lcars-table lcars-golden-tanoi-color special-caption">
+                <caption>EMPLOYEES</caption>
+                <tbody>
+                <tr>
+                    <th></th>
+                    <th>Full name</th>
+                    <th></th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+                {% for e in employee_list %}
+                <tr class="{% cycle 'lcars-black-bg' 'lcars-mariner-bg' %} lcars-golden-tanoi-color">
+                    <td class="data_cell">{{ e.get_title_display }}</td>
+                    <td>{{ e.user.first_name }}</td>
+                    <td>{{ e.user.last_name }}</td>
+                    <td class="data_cell">{{ e.department.name }}</td>
+                    <td class="data_cell">{{ e.user.email }}</td>
+                    <td class="data_cell">
+                        <select class="lcars-select {% cycle 'lcars-black-bg' 'lcars-mariner-bg' %} lcars-golden-tanoi-color">
+                            {% for role in e.user.get_roles_names %}
+                            <option>{{ role }}</option>
+                            {% empty %}
+                            <option>No Role</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td class="data_cell {% cycle 'lcars-black-bg lcars-golden-tanoi-color' 'lcars-mariner-bg lcars-black-color' %}">
+                        <a class=" icon" href="" title="Click to update the employee data"><i
+                                class="fas fa-pen"></i></a>
+                        <span class="">
+                        <a class="icon" href="" title="Click to delete the employee"><i class="fas fa-eraser"></i></a>
+                        </span>
+                        <span class="">
+                        <a class="icon" href="" title="Click to link/unlink the employee"><i
+                                class="fas fa-link"></i></a>
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                    No employee yet
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

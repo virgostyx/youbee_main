@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/department_table.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-column lcars-u-4">
+        <div>
+            <div class="top-row" style="margin-bottom: 1rem;">
+                <a href="{% url 'entities:create_department' %}"
+                   title="Click to add a department">
+                    <i class="fas fa-plus-square"></i> Add Department</a>
+            </div>
+            <div>
+                {% load django_tables2 %}
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

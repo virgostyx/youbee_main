@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/employee_update_form.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">UPDATE EMPLOYEE</div>
+        <div class="lcars-u-8-6">
+            <form id="employee_update_form"
+                  action="{% url 'entities:update_employee' employee.pk %}?next={% url 'entities:entity_employees' %}"
+                  method="POST">
+                {% csrf_token %}
+                <div class="lcars-form">
+                    <div class="lcars-form-row"> <!--first_name and last name-->
+                        <div class="lcars-form-field">
+                            <div class="title">
+                                <label for="first_name"
+                                       title=""
+                                       class="">
+                                    <b>{{ form.first_name.label }}</b>
+                                </label>
+                                <span class="lcars-u-1" style="margin-left: 6px;">
+                            <select class="lcars-black-bg lcars-white-color"
+                                    id="title"
+                                    name="title"
+                                    title="Required. Choose a title from the list"
+                                    required>
+                                <option value="1" {% if form.title.value == '1' %}selected{% endif %}>Mr.</option>
+                                <option value="2" {% if form.title.value == '2' %}selected{% endif %}>Mrs.</option>
+                                <option value="3" {% if form.title.value == '3' %}selected{% endif %}>Ms.</option>
+                            </select>
+                            </span>
+                            </div>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   style="width: 15.85rem;"
+                                   id="first_name"
+                                   name="first_name"
+                                   type="text"
+                                   value="{{ employee.user.first_name }}"
+                                   title=""
+                                   placeholder="Enter the first name of the new employee"
+                                   maxlength="150"
+                                   disabled/>
+                        </div>
+                        <div class="lcars-form-field">
+                            <label for="last_name"
+                                   title=""
+                                   class="lcars-u-1 uppercase">
+                                <b>{{ form.last_name.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="last_name"
+                                   name="last_name"
+                                   type="text"
+                                   value="{{ employee.user.last_name }}"
+                                   title=""
+                                   placeholder="Enter the last name of the new employee"
+                                   maxlength="150"
+                                   disabled/>
+
+                        </div>
+                    </div> <!--  lcars-form-row -->
+                    <div class="lcars-form-row"> <!-- password and role -->
+                        <div class="lcars-form-field">
+                            <label for="password"
+                                   class="lcars-u-1 uppercase"
+                                   style="margin-right: 10px;">
+                                <b>{{ form.password.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   name="password"
+                                   type="password"
+                                   title="Enter the new password"
+                                   placeholder="Enter a password"
+                                   id="password"
+                                   maxlength="128"
+                                   autofocus>
+                        </div>
+                        <div class="lcars-form-field">
+                            <label for="role"
+                                   class="lcars-u-1 uppercase">
+                                <b>{{ form.role.label }}</b>
+                            </label>
+                            <select class="lcars-select lcars-black-bg lcars-golden-tanoi-color"
+                                    id="role"
+                                    title=""
+                                    name="role"
+                                    required>
+                                {% for r in role_list %}
+                                    <option value="{{ r.pk }}" {% if r in employee.user.get_roles %}selected{% endif %}>{{ r.name }}</option>
+                                {% endfor role_list %}
+                            </select>
+                        </div>
+                    </div> <!--  lcars-form-row -->
+                    <div class="lcars-form-row">
+                        <div class="lcars-form-field">
+                            <label for="email1"
+                                   class="lcars-u-1 uppercase"
+                                   title=""
+                                   style="margin-right: 10px;">
+                                <b>{{ form.email1.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="email1"
+                                   name="email1"
+                                   type="email"
+                                   title=""
+                                   value="{{ employee.user.email }}"
+                                   placeholder="Enter the email address"
+                                   maxlength="48"
+                                   disabled />
+                        </div>
+                        <div class="lcars-form-field">
+                            <label for="email2"
+                                   class="lcars-u-1 uppercase">
+                                <b>{{ form.email2.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="email2"
+                                   name="email2"
+                                   title=""
+                                   value="{{ form.email2.value }}"
+                                   type="email"
+                                   placeholder="Enter the email address"
+                                   maxlength="48"/>
+                        </div>
+                    </div>
+                    <div class="lcars-form-row">
+                        <div class="lcars-form-field">
+                            <label for="phone1"
+                                   class="lcars-u-1 uppercase"
+                                   title=""
+                                   style="margin-right: 10px;">
+                                <b>{{ form.phone1.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="phone1"
+                                   name="phone1"
+                                   type="tel"
+                                   title=""
+                                   value=""
+                                   placeholder="Enter the phone number"
+                                   maxlength="16"/>
+                        </div>
+                        <div class="lcars-form-field">
+                            <label for="phone2"
+                                   title=""
+                                   class="lcars-u-1 uppercase">
+                                <b>{{ form.phone2.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="phone2"
+                                   name="phone2"
+                                   type="tel"
+                                   title=""
+                                   value=""
+                                   placeholder="Enter the phone number"
+                                   maxlength="16"/>
+                        </div>
+                    </div>
+                    <div class="lcars-form-row">
+                        <div class="lcars-form-field">
+                            <label for="whatsapp"
+                                   class="lcars-u-1 uppercase"
+                                   title=""
+                                   style="margin-right: 10px;">
+                                <b>{{ form.whatsapp.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="whatsapp"
+                                   name="whatsapp"
+                                   type="email"
+                                   title=""
+                                   value=""
+                                   placeholder="Enter the whatsapp number"
+                                   maxlength="48"/>
+                        </div>
+                        <div class="lcars-form-field">
+                            <label for="twitter"
+                                   title=""
+                                   class="lcars-u-1 uppercase">
+                                <b>{{ form.twitter.label }}</b>
+                            </label>
+                            <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                                   id="twitter"
+                                   name="twitter"
+                                   type="text"
+                                   title=""
+                                   value=""
+                                   placeholder="Enter the twitter name"
+                                   maxlength="15"/>
+                        </div>
+                    </div>
+                    <div class="lcars-form-row">
+                        <div class="lcars-form-field">
+                            <label class="lcars-u-1"
+                                   title=""
+                                   style="margin-right: 10px;">
+                                <b>{{ form.department.label }}</b>
+                            </label>
+                            <select id="add_dep_select"
+                                    class="lcars-select more-width lcars-black-bg lcars-golden-tanoi-color"
+                                    name="department"
+                                    title=""
+                                    required>
+                                {% for department in department_list %}
+                                  <option value="{{ department.pk }}" {% if employee.department.pk == department.pk %}selected{% endif %}>{{ department.name }}</option>
+                                {% endfor department_list %}
+                            </select>
+                        </div>
+                    </div>
+                    {% include './includes/_form_buttons_employee.html' %}
+                </div> <!--  lcars-form -->
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+
+{% endblock content %}

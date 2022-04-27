@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/employee_table.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-column lcars-u-8">
+        <div>
+            <div class="top-row">
+                    <a href="{% url 'entities:create_employee' %}?next={{ request.get_full_path|urlencode }}"
+                       title="Click to add an employee">
+                        <i class="fas fa-plus-square"></i> Add Employee</a>
+                    <a href="" style="margin-left: 0.5em;"
+                       title="Export employees list">
+                        <i class="fa-solid fa-file-export"></i>
+                    </a>
+            </div>
+            <div>
+                {% load django_tables2 %}
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

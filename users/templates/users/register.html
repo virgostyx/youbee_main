@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'users/css/register.css' %}">
+{% endblock css %}
+
+{% block script %}
+
+{{ block.super }}
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock script %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8 lcars-black-bg">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">REGISTER</div>
+        <div class="lcars-u-8-6" style="margin-left: 40px;">
+            <form id="register_form"
+                  action="{% url 'users:register' %}"
+                  method="POST">
+                {% csrf_token %}
+                <p> <!-- Email input -->
+                    <label for="email"
+                           class="lcars-u-1 uppercase"
+                           title="Required. Enter the email address of the entity representative"
+                           style="display: inline-block;">
+                        <b>{{ form.email.label }}</b>
+                    </label>
+                    <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                           id="email"
+                           name="email"
+                           type="email"
+                           title="Required. Enter the email address of the entity representative"
+                           placeholder="Enter an email address"
+                           maxlength="254"
+                           required
+                           autofocus>
+                </p>
+                <p> <!-- Entity name input -->
+                    <label for="entity"
+                           class="lcars-u-1 uppercase"
+                           title="Required. Enter the name of the entity"
+                           style="display: inline-block;">
+                        <b>{{ form.entity.label }}</b>
+                    </label>
+                    <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                           id="entity"
+                           name="entity"
+                           type="text"
+                           title="Required. Enter the name of the entity"
+                           placeholder="Enter the entity name"
+                           maxlength="48"
+                           required/>
+                </p>
+                <p>
+                <div class="lcars-row">
+                    <div class="lcars-u-4">
+                        <label for="first_name"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter the representative first name"
+                               style="margin-right: 15px;">
+                            <b>{{ form.first_name.label }}</b>
+                        </label>
+                        <select class="lcars-black-bg lcars-white-color"
+                                id="title"
+                                name="title"
+                                title="Required. Choose a title from the list"
+                                required>
+                            <option value="1" selected>Mr.</option>
+                            <option value="2">Mrs.</option>
+                            <option value="3">Ms.</option>
+                        </select>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color" id="first_name"
+                               style="width: 15.50rem;"
+                               name="first_name"
+                               type="text"
+                               title="Required. Enter the representative first name"
+                               placeholder="Enter your first name"
+                               maxlength="150"
+                               required/>
+                    </div>
+                    <div class="lcars-u-4">
+                        <label for="last_name"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter the representative last name"
+                               style="display: inline-block;">
+                            <b>{{ form.last_name.label }}</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               id="last_name"
+                               name="last_name"
+                               title="Required. Enter the representative last name"
+                               type="text"
+                               placeholder="Enter the entity name"
+                               maxlength="150"
+                               required/>
+                    </div>
+                </div>
+                </p>
+                <p>
+                <div class="lcars-row">
+                    <div class="lcars-u-4">
+                        <label for="password1"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter a password"
+                               style="display: inline-block;">
+                            <b>{{ form.password1.label }}</b>
+                        </label>
+                        <input class="lcars-u-3 half decorated rounded lcars-golden-tanoi-color"
+                               name="password1"
+                               type="password"
+                               title="Required. Enter a password"
+                               placeholder="Enter a password"
+                               id="password1"
+                               maxlength="128"
+                               required>
+                    </div>
+                    <div class="lcars-u-4"
+                         style="display: table;">
+                        <label for="password2"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter the chosen password again"
+                               style="display: table-cell;">
+                            <b>{{ form.password2.label }}</b>
+                        </label>
+                        <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                               style="display: table-cell; margin-left:5px;"
+                               name="password2"
+                               title="Required. Enter the chosen password again"
+                               type="password"
+                               id="password2"
+                               placeholder="Enter again the  password"
+                               maxlength="128"
+                               required>
+                    </div>
+                </div>
+                <input id="id_ctrl_flag"
+                       type="hidden"
+                       value="0"
+                       name="ctrl_flag">
+                </p>
+                <div class="lcars-row centered button-row">
+                    <div class="lcars-column lcars-u-2">
+                        <div class="button-grid">
+                            <button class="lcars-element button uppercase lcars-husk-bg"
+                                    type="submit">Transmit
+                            </button>
+                            <a href="{% url 'home' %}">
+                                <button class="lcars-element button uppercase lcars-red-damask-bg"
+                                        type="button">Cancel
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+{% endblock content %}

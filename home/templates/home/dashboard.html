@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'home/css/dashboard.css' %}">
+
+<style>
+
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-user-details" style="">
+        <div class="lcars-row centered">
+            <div class="lcars-column lcars-u-8 lcars-black-bg">
+                <div class="lcars-element lcars-u-8" style="height: 2rem;">ENTITY DETAILS</div>
+                <div class="lcars-u-8-6">
+                    <br>
+                    <p>
+                    <div class="lcars-row"> <!-- ENTITY NAME -->
+                        <div class="lcars-u-8">
+                            <label for="name"
+                                   class="lcars-u-1 uppercase">
+                                <b>ENTITY:</b>
+                            </label>
+                            <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                                   style="margin-left: 3.65rem;"
+                                   id="name"
+                                   name="name"
+                                   value="{{ user.employee.entity.name }}"
+                                   type="text"
+                                   maxlength="48"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                    <div class="lcars-row"> <!-- ADDRESS1 -->
+                        <div class="lcars-u-8">
+                            <label for="address1"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>ADDRESS1:</b>
+                            </label>
+                            <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                                   id="address1"
+                                   name="address1"
+                                   value="{{ user.employee.entity.entity_details.address1 }}"
+                                   type="text"
+                                   maxlength="128"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                    <div class="lcars-row"> <!-- ADDRESS2 -->
+                        <div class="lcars-u-8">
+                            <label for="address2"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>ADDRESS2:</b>
+                            </label>
+                            <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                                   id="address2"
+                                   name="address2"
+                                   value="{{ user.employee.entity.entity_details.address2 }}"
+                                   type="text"
+                                   maxlength="128"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                    <div class="lcars-row"> <!-- CITY, ZIP -->
+                        <div class="lcars-u-4">
+                            <label for="city"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>CITY:</b>
+                            </label>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   id="city"
+                                   name="city"
+                                   value="{{ user.employee.entity.entity_details.city }}"
+                                   type="text"
+                                   maxlength="32"
+                                   readonly
+                            />
+                        </div>
+                        <div class="lcars-u-4">
+                            <label for="zip_code"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>ZIP CODE:</b>
+                            </label>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   id="zip_code"
+                                   name="zip_code"
+                                   value="{{ user.employee.entity.entity_details.zip_code }}"
+                                   type="text"
+                                   maxlength="16"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                    <div class="lcars-row"> <!-- COUNTRY -->
+                        <div class="lcars-u-4">
+                            <label for="country"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>COUNTRY:</b>
+                            </label>
+                            {% load countries %}
+                            {% get_countries as countries %}
+                            <input id="country"
+                                   name="country"
+                                   class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   value="{{ user.employee.entity.entity_details.country.name }}"
+                                   type="text"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                    <div class="lcars-row"> <!-- PHONE NOS (2) -->
+                        <div class="lcars-u-4">
+                            <label for="phone1"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>PHONE1:</b>
+                            </label>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   id="phone1"
+                                   name="phone1"
+                                   value="{{ user.employee.entity.entity_details.phone1 }}"
+                                   type="tel"
+                                   maxlength="16"
+                                   readonly
+                            />
+                        </div>
+                        <div class="lcars-u-4">
+                            <label for="phone2" class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>PHONE2:</b>
+                            </label>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   id="phone2"
+                                   name="phone2"
+                                   value="{{ user.employee.entity.entity_details.phone2 }}"
+                                   type="tel"
+                                   maxlength="16"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                    <div class="lcars-row"> <!-- EMAILS (2) -->
+                        <div class="lcars-u-4">
+                            <label for="email1"
+                                   class="lcars-u-1 uppercase"
+                                   style="display: inline-block;">
+                                <b>EMAIL1:</b>
+                            </label>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   id="email1"
+                                   name="email1"
+                                   value="{{ user.employee.entity.entity_details.email1 }}"
+                                   type="email"
+                                   maxlength="48"
+                                   readonly
+                            />
+                        </div>
+                        <div class="lcars-u-4">
+                            <label for="email2"
+                                   class="lcars-u-1 uppercase"
+                                   title="Enter an email address"
+                                   style="display: inline-block;">
+                                <b>EMAIL2:</b>
+                            </label>
+                            <input class="lcars-u-2 decorated rounded lcars-golden-tanoi-color"
+                                   id="email2"
+                                   name="email2"
+                                   value="{{ user.employee.entity.entity_details.email2 }}"
+                                   type="email"
+                                   maxlength="48"
+                                   readonly
+                            />
+                        </div>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-departments">
+        <div class="lcars-row centered">
+            <div class="lcars-column lcars-u-5 lcars-black-bg">
+                <div class="lcars-element lcars-u-5" style="height: 2rem;">DEPARTMENTS</div>
+                <div class="lcars-u-5-6">
+                    {% load django_tables2 %}
+                    {% render_table tables.0 %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-employees">
+        <div class="lcars-row centered">
+            <div class="lcars-column lcars-u-8 lcars-black-bg">
+                <div class="lcars-element lcars-u-8" style="height: 2rem;">EMPLOYEES</div>
+                <div class="lcars-u-8-6">
+                    {% load django_tables2 %}
+                    {% render_table tables.1 %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-entity-groups">
+        <div class="lcars-row centered">
+            <div class="lcars-column lcars-u-5 lcars-black-bg">
+                <div class="lcars-element lcars-u-5" style="height: 2rem;">PARTNERS</div>
+                <div class="lcars-u-5-6">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

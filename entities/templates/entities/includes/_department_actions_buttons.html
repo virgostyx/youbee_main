@@ -1,0 +1,22 @@
+ <a class="icon"
+    href="{% url 'entities:update_department' record.pk %}"
+    title="Click to update the department name">
+     <i class="fas fa-pen"></i></a>
+ <span class="">
+     <a class="icon"
+         {% if record.employees.count > 0 %}
+            href="#"
+            title="Impossible to delete this department. Remove employees first.">
+         {% else %}
+            href="{% url 'entities:delete_department' record.pk %}"
+            title="Click to delete a department">
+         {% endif %}
+         <i class="fas fa-eraser"></i>
+     </a>
+ </span>
+ <span class="">
+     <a class="icon"
+        href="" title="Click to link/unlink a department">
+         <i class="fas fa-link"></i>
+     </a>
+ </span>

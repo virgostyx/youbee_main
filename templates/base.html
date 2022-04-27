@@ -1,0 +1,182 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}YOUBEE - Administration and Management{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static './img/start-trek.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/lcars.css' %}">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
+    <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block css %}
+
+    {% endblock css %}
+
+
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+    {% block script %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/base_jquery.js' %}"></script>
+
+    {% endblock script %}
+
+</head>
+<body {% if messages %} onload="showMessages()" {% endif %}>
+<div class="lcars-app-container">
+    <!-- HEADER ==================================================== -->
+    <div id="header" class="lcars-row header">
+
+        <!-- ELBOW - DESKTOP ONLY -->
+        <div class="lcars-elbow left-bottom lcars-golden-tanoi-bg show-for-desktop"></div>
+
+        <!-- LEFT ROUNDED EDGE - MOBILE ONLY -->
+        <!--       <div class="lcars-bar horizontal left-end decorated show-for-mobile"></div>-->
+
+        <!-- BAR WITH TITLE - ALL flex-for-mobile-->
+        <div class="lcars-bar horizontal ">
+
+            {% if user.is_authenticated %}
+            <!-- User Menu -->
+            <div class="lcars-user dropdown">
+                <button class="lcars-black-color lcars-golden-tanoi-bg dropbtn"><strong><i
+                        class="fa-solid fa-circle-user"></i> {{ user.email }} <i class="fa fa-caret-down"></i></strong>
+                </button>
+                <div class="dropdown-content">
+                    <a href="{% url 'users:user_detail' %}?next={{ request.get_full_path|urlencode }}">User detail</a>
+                    <a href="{% url 'users:password_change' %}">Change password</a>
+                    <a href="{% url 'users:signout'%}">Sign out</a>
+                </div>
+            </div>
+
+            {% endif %}
+
+            <!-- MENU ICON - MOBILE ONLY -->
+            <!--            <div class="show-for-mobile">
+                            <div id="menu-button" class="lcars-title left left-space" onclick="openMenu()">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>-->
+
+            <div class="lcars-title right">YOUBEE</div>
+        </div>
+
+        <!-- ROUNDED EDGE DECORATED - ALL  -->
+        <div class="lcars-bar horizontal right-end decorated"></div>
+    </div>
+
+    <!-- SIDE MENU - ALL WITH SMALLER SIZE FOR MOBILE ======================================== -->
+
+    <div id="left-menu" class="lcars-column start-space lcars-u-1">
+        <a href="{% url 'home' %}">
+            <div class="lcars-element button lcars-chestnut-rose-bg">Home</div>
+        </a>
+        <a href="{% url 'about' %}">
+            <div class="lcars-element button lcars-neon-carrot-bg">About</div>
+        </a>
+        <a href="{% url 'contact' %}">
+            <div class="lcars-element button lcars-red-alert-bg">Contact</div>
+        </a>
+
+        {% block menu %}
+
+        {% if user.is_authenticated %}
+        {% include "./includes/_logged_menu.html" %}
+        {% else %}
+        {% include "./includes/_anonymous_menu.html" %}
+        {% endif %}
+
+        {% endblock menu %}
+
+        <!-- FILLER -->
+        <div class="lcars-bar lcars-u-1 show-for-desktop"></div>
+    </div>
+
+    <!-- FOOTER ==================================================== -->
+
+    <div id="footer" class="lcars-row ">`
+        <!-- ELBOW - DESKTOP ONLY -->
+        <div class="lcars-elbow left-top lcars-golden-tanoi-bg show-for-desktop elbow-margin-left"></div>
+
+        <!-- LEFT ROUNDED EDGE - MOBILE ONLY -->
+        <!-- <div class="lcars-bar horizontal left-end right-divider bottom show-for-mobile"></div>-->
+
+        <!-- BAR - ALL -->
+        <div class="lcars-bar horizontal bottom">
+            <div class="justify-footer vertically-centered">
+                {% if user.is_authenticated %}
+                <div class="show-for-desktop">Company: <strong>{{ user.employee.entity.name }}</strong> - Department:
+                    <strong>{{ user.employee.department.name }}</strong>
+                </div>
+                {% else %}
+                <div class="show-for-desktop"></div>
+
+                {% endif %}
+                <!--               <div class="show-for-mobile">
+                                   <i class="fas fa-users"></i> <strong class="footer-font">The Youbee Test Company</strong>
+                               </div>-->
+                <div class="copyright">&copy Youbee v0.1</div>
+            </div>
+        </div>
+
+        <!-- ROUNDED EDGE - ALL -->
+        <div class="lcars-bar horizontal right-end left-divider bottom"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <!--class="margin-for-mobile"-->
+    <div id="container" style="min-height: 100%;">
+        {% block content %}
+
+        <p>Here comes the stuff</p>
+
+        {% endblock content %}
+
+
+    </div>
+</div>
+
+{% if messages %}
+<div id="snackbar">
+    {% for message in messages %}
+    <div class="lcars-alert lcars-u-8-2 rounded lcars-{{ message.tags }}-bg">
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<audio id="audDummy"/>
+<!--Just leave this here, just needed to enable automatic query can play in the initialization code to load compatible media types -->
+<script src="{% static 'js/lcars_audio.js' %}"></script>
+
+<script>
+  	//All "booted" up notification.
+  	//Many browsers won't play this next sound because the user hasn't "blessed" the action with a UI click yet.
+  	document.addEventListener("DOMContentLoaded", function(event) {
+  		 lcarsAudio.Ready();
+  	});
+
+  	//Cosmetic-ish behavior: scroll to gets hidden by top row body frame, so we need to scroll back slighly to have the actual heading element for each section visible after an in-page navigation.
+  	function locationHashChanged() {
+  		if (location.hash.substr(-8) == "_section") {
+  			console.info("in-page nav detected.");
+  			setTimeout(function(){window.scrollBy(0,-100)}, 100);
+  		}
+  	}
+  	window.onhashchange = locationHashChanged;
+
+</script>
+
+<script src="{% static 'js/base.js' %}"></script>
+
+{% block javascript %}
+
+{% endblock javascript %}
+</body>
+</html>

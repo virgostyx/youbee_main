@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}Registration impossible. Can't find the permissions for a supervisor{% endblocktrans %}

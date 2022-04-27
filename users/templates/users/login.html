@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'users/css/login.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="lcars-row centered">
+    <div class="lcars-bracket left hollow"></div>
+    <div class="lcars-column lcars-u-8 lcars-black-bg">
+        <div class="lcars-element lcars-u-8" style="height: 2rem;">SIGN IN</div>
+        <div class="lcars-u-8-5" style="margin-left: 40px;">
+            <form id="signin_form"
+                  action="{% url 'users:signin' %}"
+                  method="POST">
+                {% csrf_token %}
+                <p> <!-- Email input -->
+                    <label for="login"
+                           class="lcars-u-1 uppercase"
+                           title="Required. Enter your email you registered with"
+                           style="display: inline-block;">
+                        <b>Email*: </b>
+                    </label>
+                    <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                           id="login" name="login"
+                           type="email"
+                           title="Required. Enter your email you registered with"
+                           placeholder="Enter the owner email address"
+                           maxlength="254"
+                           required
+                           autofocus>
+                </p>
+                <p>
+                <div class="lcars-row">
+                    <div class="lcars-u-8">
+                        <label for="password"
+                               class="lcars-u-1 uppercase"
+                               title="Required. Enter your password"
+                               style="display: inline-block;">
+                            <b>Password*: </b>
+                        </label>
+                        <input class="lcars-u-6 decorated rounded lcars-golden-tanoi-color"
+                               id="password"
+                               name="password"
+                               type="password"
+                               title="Required. Enter your password"
+                               placeholder="Enter a password"
+                               maxlength="128"
+                               required>
+                    </div>
+                </div>
+                </p>
+                <p>
+                    <a class=""
+                       title="Click on this link if you forgot your password"
+                       href="{% url 'users:password_reset' %}">Forgot Password?</a>
+                </p>
+                {% include "./includes/_form_buttons.html" %}
+            </form>
+        </div>
+        <div class="lcars-element lcars-u-8" style="height: 0.75rem;"></div>
+    </div>
+    <div class="lcars-bracket right hollow"></div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+input[type='checkbox']{
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: 1px solid #fc6;
+  box-shadow: none;
+  font-size: 1.1em;
+  text-align: center;
+  line-height: 1em;
+  background: black;
+}
+
+input[type='checkbox']:checked:after {
+  content: '✔';
+  color: #fc6;
+  background-color: #000;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 1rem;
+}
+
+.display-border {
+    border-top: 1px solid white;
+}
+
+.lcars-row.button-row {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+body {
+  background-image: url('/static/img/vincenzo-malagoli-flfhAlEwDq4-unsplash.jpg');
+  background-size: cover;
+}

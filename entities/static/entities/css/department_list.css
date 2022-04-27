@@ -1,0 +1,15 @@
+.icon {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+table.special-caption caption {
+    margin-left: -0.5em;
+    margin-bottom: 0.5em;
+    text-align: right;
+    border-right: 0.8em solid;
+    border-left: 20rem solid;
+    border-radius: 0.5em;
+    padding-right: 0.33em;
+    padding-left: 0.33em;
+}

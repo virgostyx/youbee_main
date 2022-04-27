@@ -1,0 +1,50 @@
+.data_cell {
+    border-left: solid 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+table.special-caption caption {
+    margin-left: -0.5em;
+    margin-bottom: 0.5em;
+    text-align: right;
+    border-right: 0.8em solid;
+    border-left: 55rem solid;
+    border-radius: 0.5em;
+    padding-right: 0.33em;
+    padding-left: 0.33em;
+}
+
+.first-row-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.pagination {
+
+}
+
+.step-links a {
+
+}
+
+.step-links a:hover:not(.active) {
+    background-color: #fc6;
+    color: #000
+}
+
+.current {
+
+}
+
+.lcars-select {
+    width:12em;
+    border-right: 0.8em solid #fc6;
+    border-left: 0.8em solid #fc6;
+    border-radius: 0.5em;
+    border-top: none;
+    border-bottom: none;
+    font-size: 1em;
+}

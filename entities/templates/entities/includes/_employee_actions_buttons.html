@@ -1,0 +1,17 @@
+ <a class="icon"
+    href="{% url 'entities:update_employee' record.pk %}?next={{ request.get_full_path|urlencode }}"
+    title="Click to update the employee data">
+     <i class="fas fa-pen"></i></a>
+ <span class="">
+     <a class="icon"
+        href="{% url 'entities:delete_employee' record.pk %}?next={{ request.get_full_path|urlencode }}"
+        title="Click to delete an employee">
+         <i class="fas fa-eraser"></i>
+     </a>
+ </span>
+ <span class="">
+     <a class="icon"
+        href="" title="Click to link/unlink an employee">
+         <i class="fas fa-link"></i>
+     </a>
+ </span>
